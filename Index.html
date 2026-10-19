@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NurseSaathi – CHC Emergency & Skills</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #f2f6fa;
+    color: #1a2733;
+    font-size: 15px;
+    line-height: 1.5;
+    padding-bottom: 75px;
+  }
+  header {
+    background: linear-gradient(135deg, #0b6e99, #0a4a66);
+    color: #fff;
+    padding: 14px 16px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  header h1 { font-size: 17px; font-weight: 600; }
+  header p { font-size: 11px; opacity: .85; }
+  main { padding: 12px; }
+  .tab { display: none; }
+  .tab.active { display: block; animation: fade .2s; }
+  @keyframes fade { from{opacity:0} to{opacity:1} }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  }
+  .card h2 {
+    font-size: 15px;
+    color: #0b6e99;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e3eef4;
+  }
+  .card h3 { font-size: 13px; color: #333; margin: 8px 0 4px; }
+  ul { padding-left: 18px; }
+  li { margin-bottom: 4px; font-size: 14px; }
+  .red { color: #c0392b; font-weight: 600; }
+  .warn {
+    background: #fff3cd;
+    border-left: 4px solid #f39c12;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  .danger {
+    background: #fdecea;
+    border-left: 4px solid #e74c3c;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
+  th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eef2f5; }
+  th { background: #eaf4fa; color: #0b6e99; font-size: 12px; }
+  tr:last-child td { border-bottom: none; }
+
+  .check-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px; background: #f8fbfd;
+    border-radius: 8px; margin-bottom: 6px;
+    cursor: pointer; font-size: 14px;
+  }
+  .check-item input { width: 18px; height: 18px; accent-color: #0b6e99; }
+  .check-item.done { background: #e8f5e9; text-decoration: line-through; color: #666; }
+
+  nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #fff; display: flex; overflow-x: auto;
+    box-shadow: 0 -2px 10px rgba(0,0,0,.1);
+    z-index: 200;
+  }
+  nav button {
+    flex: 1 0 auto;
+    min-width: 65px;
+    padding: 8px 4px;
+    border: none; background: none;
+    font-size: 10px; color: #666;
+    cursor: pointer; text-align: center;
+  }
+  nav button span { display: block; font-size: 20px; margin-bottom: 2px; }
+  nav button.active { color: #0b6e99; font-weight: 600; background: #eaf4fa; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🩺 NurseSaathi</h1>
+  <p>CHC Emergency & Skills – Staff Nurse Handy App</p>
+</header>
+
+<main>
+
+<!-- 1. EMERGENCY -->
+<section class="tab active" id="t-emergency">
+  <div class="card">
+    <h2>🚨 Cardiac Arrest – What to do NOW</h2>
+    <h3>Step 1 – Recognise (10 sec)</h3>
+    <ul>
+      <li>Responsive? "શું સાંભળો છો?"</li>
+      <li>Breathing? છાતી ઉપડે છે?</li>
+      <li>Carotid pulse 10 sec?</li>
+      <li class="red">ના → CODE BLUE + CPR શરૂ</li>
+    </ul>
+    <h3>Step 2 – CPR</h3>
+    <ul>
+      <li>100–120/min, depth 5–6 cm, full recoil</li>
+      <li>Ratio 30:2 (Ambu bag)</li>
+      <li>દર 2 min compressor બદલો</li>
+    </ul>
+    <h3>Step 3 – Defibrillator</h3>
+    <ul>
+      <li>VF/Pulseless VT → તરત shock 120–200 J</li>
+      <li>દર 2 min rhythm check</li>
+    </ul>
+    <h3>Step 4 – Drugs (doctor order)</h3>
+    <ul>
+      <li>Adrenaline 1 mg IV every 3–5 min</li>
+      <li>Amiodarone 300 mg IV after 3rd shock</li>
+    </ul>
+    <div class="warn"><b>5H/5T:</b> Hypoxia, Hypovolemia, Hyper/Hypokalemia, Hypothermia, H⁺ | Tension pneumothorax, Tamponade, Toxins, Thrombosis</div>
+  </div>
+</section>
+
+<!-- 2. VITALS -->
+<section class="tab" id="t-vitals">
+  <div class="card">
+    <h2>📊 Vitals – Normal vs Red Flag</h2>
+    <table>
+      <tr><th>Vitals</th><th>Normal</th><th>Doctor ને બોલાવો</th></tr>
+      <tr><td>HR</td><td>60–100</td><td class="red">&lt;40 / &gt;130</td></tr>
+      <tr><td>BP</td><td>90–140</td><td class="red">&lt;90 / &gt;180</td></tr>
+      <tr><td>RR</td><td>12–20</td><td class="red">&lt;8 / &gt;30</td></tr>
+      <tr><td>SpO₂</td><td>≥94%</td><td class="red">&lt;90%</td></tr>
+      <tr><td>Temp</td><td>36.5–37.5°C</td><td class="red">&gt;38.5 / &lt;35</td></tr>
+      <tr><td>GRBS</td><td>70–140</td><td class="red">&lt;70 / &gt;250</td></tr>
+      <tr><td>Urine</td><td>≥0.5 mL/kg/hr</td><td class="red">&lt;0.5</td></tr>
+      <tr><td>GCS</td><td>15</td><td class="red">≤8</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>🧠 GCS Calculator</h2>
+    <h3>Eye (1–4) | Verbal (1–5) | Motor (1–6)</h3>
+    <ul>
+      <li><b>Eye:</b> 4 Spontaneous, 3 Command, 2 Pain, 1 None</li>
+      <li><b>Verbal:</b> 5 Oriented, 4 Confused, 3 Inappropriate, 2 Sounds, 1 None</li>
+      <li><b>Motor:</b> 6 Obeys, 5 Localizes, 4 Withdraws, 3 Flexion, 2 Extension, 1 None</li>
+    </ul>
+    <div class="danger"><b>GCS ≤8 → Doctor ને તરત બોલાવો (intubation જરૂરી)</b></div>
+  </div>
+</section>
+
+<!-- 3. DRUGS -->
+<section class="tab" id="t-drugs">
+  <div class="card">
+    <h2>⚠️ High-Alert Drugs – Double Check</h2>
+    <ul>
+      <li>Adrenaline, Noradrenaline</li>
+      <li>Insulin, Heparin</li>
+      <li>Potassium chloride (KCl)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>💉 Common ER Drugs</h2>
+    <table>
+      <tr><th>Drug</th><th>ઓળખ</th><th>યાદ રાખો</th></tr>
+      <tr><td>Adrenaline</td><td>1 mg/mL</td><td>1:1000 vs 1:10,000</td></tr>
+      <tr><td>Atropine</td><td>0.6 mg/mL</td><td>Bradycardia</td></tr>
+      <tr><td>Amiodarone</td><td>Amber 150/3 mL</td><td>Rapid push નહીં</td></tr>
+      <tr><td>Noradrenaline</td><td>4 mg/2 mL</td><td>Central line</td></tr>
+      <tr><td>Nitroglycerin</td><td>5 mg/mL</td><td>BP ડ્રોપ ચેક</td></tr>
+      <tr><td>Furosemide</td><td>20 mg/2 mL</td><td>Output ચેક</td></tr>
+      <tr><td>Insulin</td><td>100 IU/mL</td><td>GRBS hourly</td></tr>
+      <tr><td>D50</td><td>Prefilled 50 mL</td><td>15 min પછી GRBS</td></tr>
+      <tr><td>Naloxone</td><td>0.4 mg/mL</td><td>Opioid overdose</td></tr>
+      <tr><td>MgSO₄</td><td>50%</td><td>Reflex + BP</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>📌 Dilution – 5 નિયમ</h2>
+    <ul>
+      <li>Ampoule = original; diluted નહીં</li>
+      <li>લેબલ વાંચો – નામ + dose + expiry</li>
+      <li>High-alert = double-check</li>
+      <li>Infusion pump જ</li>
+      <li>Label – drug, dose, time, prepared by</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4. IV FLUIDS -->
+<section class="tab" id="t-iv">
+  <div class="card">
+    <h2>💧 IV Fluids & Drip Rate</h2>
+    <div class="warn"><b>Drops/min = (Volume in mL × Drop factor) / Time in minutes</b><br>
+    દા.ત. 500 mL NS over 8 hr, factor 20: (500 × 20) / 480 = <b>21 drops/min</b></div>
+    <ul>
+      <li class="red">KCl – Never IV push; dilute + pump</li>
+      <li>Extravasation → તરત બંધ + doctor</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 5. CARDS -->
+<section class="tab" id="t-cards">
+  <div class="card">
+    <h2>🔴 Anaphylaxis</h2>
+    <ul>
+      <li>Red flag: urticaria + wheeze + BP drop</li>
+      <li>Adrenaline 0.3–0.5 mg IM (thigh)</li>
+      <li>O₂, IV NS 500–1000 mL</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>🟡 Hypoglycemia</h2>
+    <ul>
+      <li>GRBS &lt;70 → conscious: oral glucose</li>
+      <li>Unconscious: D50 50 mL IV</li>
+      <li>15 min પછી GRBS ફરી ચેક</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>🟠 Seizure</h2>
+    <ul>
+      <li>સલામત જગ્યાએ સૂવડાવો, મોંમાં કંઈ ન નાખો</li>
+      <li>Time નોંધો – 5 min થી વધુ = status</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>🐍 Snake Bite</h2>
+    <ul>
+      <li class="red">Tourniquet ના બાંધવો</li>
+      <li>Limb immobilize કરો, Bite site કાપો નહીં</li>
+      <li>ASV (order) + monitor allergy</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>💉 Needle-Stick</h2>
+    <ul>
+      <li>સાબુ-પાણી, લોહી દબાવો નહીં</li>
+      <li>તરત report + PEP (2 hr માં)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 6. SKILLS -->
+<section class="tab" id="t-skills">
+  <div class="card">
+    <h2>✅ Skills Checklist</h2>
+    <p id="progress" style="font-size:13px;color:#0b6e99;margin-bottom:8px;"></p>
+    <div id="skills-list"></div>
+  </div>
+</section>
+
+</main>
+
+<nav>
+  <button onclick="showTab('emergency',this)" class="active"><span>🚨</span>ER</button>
+  <button onclick="showTab('vitals',this)"><span>📊</span>Vitals</button>
+  <button onclick="showTab('drugs',this)"><span>💉</span>Drugs</button>
+  <button onclick="showTab('iv',this)"><span>💧</span>IV</button>
+  <button onclick="showTab('cards',this)"><span>🩺</span>Cards</button>
+  <button onclick="showTab('skills',this)"><span>✅</span>Skills</button>
+</nav>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('t-' + id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+const skills = [
+  "Vital signs (BP, HR, RR, SpO₂, Temp, GRBS)",
+  "IV cannulation",
+  "IV fluid setup + rate calculation",
+  "IM / IV / SC injection",
+  "Oxygen therapy (devices)",
+  "Ambu bag ventilation",
+  "Suction",
+  "ECG taking",
+  "Urinary catheterisation",
+  "Ryle's tube insertion",
+  "Wound dressing",
+  "Crash cart check",
+  "Handover (SBAR)",
+  "CPR (BLS)",
+  "Aseptic technique"
+];
+const skillKey = 'ns_skills';
+let skillState = JSON.parse(localStorage.getItem(skillKey) || '{}');
+const list = document.getElementById('skills-list');
+skills.forEach((s, i) => {
+  const div = document.createElement('label');
+  div.className = 'check-item' + (skillState[i] ? ' done' : '');
+  div.innerHTML = `<input type="checkbox" ${skillState[i] ? 'checked' : ''} onchange="toggleSkill(${i}, this)"> ${s}`;
+  list.appendChild(div);
+});
+function toggleSkill(i, el) {
+  skillState[i] = el.checked;
+  el.parentElement.classList.toggle('done', el.checked);
+  localStorage.setItem(skillKey, JSON.stringify(skillState));
+  updateProgress();
+}
+function updateProgress() {
+  const done = Object.values(skillState).filter(Boolean).length;
+  document.getElementById('progress').textContent =
+    `તમે ${skills.length} માંથી ${done} skills પૂરા કર્યા (${Math.round(done/skills.length*100)}%)`;
+}
+updateProgress();
+</script>
+
+</body>
+</html>
